@@ -8,21 +8,22 @@ export default function ArticlesList() {
     const loadingMessage = 'Articles loading...';
 
     useEffect(() => {
-        getArticles().then(articles => {
+        getArticles()
+        .then(articles => {
             setArticles(articles)
             setIsLoading(false)
         })
         .catch((error) => {
             setIsLoading(false)
-            return error
+            console.log(error)
         })
     }, []);
 
     return( isLoading ? loadingMessage : 
         <>
             {articles.map((article) => (
-        <ArticleCard key={article.article_id} article={article} />
-      ))}
+                <ArticleCard key={article.article_id} article={article} />
+            ))}
         </>
     )
 }

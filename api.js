@@ -9,6 +9,9 @@ const getArticles = () => {
     .then(({data}) => {
         return data.articles
     })
+    .catch((err) => {
+        console.log(err)
+    })
 }
 
 const getArticlesById = (article_id) => {
@@ -16,6 +19,19 @@ const getArticlesById = (article_id) => {
     .then(({data}) => {
         return data.article
     })
+    .catch((err) => {
+        console.log(err)
+    })
 }
 
-export {getArticles, getArticlesById };
+const getArticleComments = (article_id) => {
+    return api.get(`/articles/${article_id}/comments`)
+    .then(({data}) => {
+        return data.comments
+    })
+    .catch((err) => {
+        console.log(err)
+    })
+}
+
+export {getArticles, getArticlesById, getArticleComments };
