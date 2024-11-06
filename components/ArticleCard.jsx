@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 
 const ArticleCard = (props) => {
   const { article } = props;
+
   return (
     <section className="display-item">
       <Link to={`/articles/${article.article_id}`}>
