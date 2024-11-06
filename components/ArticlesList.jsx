@@ -12,6 +12,10 @@ export default function ArticlesList() {
             setArticles(articles)
             setIsLoading(false)
         })
+        .catch((error) => {
+            setIsLoading(false)
+            return error
+        })
     }, []);
 
     return( isLoading ? loadingMessage : 
