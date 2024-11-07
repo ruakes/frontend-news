@@ -9,18 +9,12 @@ const getArticles = () => {
     .then(({data}) => {
         return data.articles
     })
-    .catch((err) => {
-        console.log(err)
-    })
 }
 
 const getArticlesById = (article_id) => {
     return api.get(`/articles/${article_id}`)
     .then(({data}) => {
         return data.article
-    })
-    .catch((err) => {
-        console.log(err)
     })
 }
 
@@ -29,9 +23,12 @@ const getArticleComments = (article_id) => {
     .then(({data}) => {
         return data.comments
     })
-    .catch((err) => {
-        console.log(err)
-    })
 }
 
-export {getArticles, getArticlesById, getArticleComments };
+const patchArticleVotes = (article_id, incVotes) => {
+    return axios.patch(`https://backend-news-tssw.onrender.com/api/articles/${article_id}`, incVotes)
+    .then(({data}) => {
+        return data.article
+    })
+}
+export {getArticles, getArticlesById, getArticleComments, patchArticleVotes };
