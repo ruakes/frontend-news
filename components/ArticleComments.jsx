@@ -21,9 +21,10 @@ export default function ArticleComments({article_id}) {
     
     return (isLoading ? loadingMessage : 
         <>
-            {comments.map((comment) => {
+            { comments.length ? 
+            comments.map((comment) => {
                return <CommentCard key={comment.comment_id} comment={comment}/>
-            })}
+            }) : <p>No comments</p>}
         </>
     )
 }
