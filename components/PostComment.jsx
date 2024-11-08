@@ -32,7 +32,7 @@ export default function PostComment({article_id , isPostSuccess, setPostSuccess}
     return (
         <div>
             {isPostSuccess ? <p>Your comment has been posted</p> : null}
-            <form onSubmit={handleSubmit}>
+            <form id="comment-form" onSubmit={handleSubmit}>
                 <label>What do you think?</label>
                 <br></br>
                 <input type="text" value={comment} onChange={(e) => setComment(e.target.value)} placeholder="Comment here..." />
