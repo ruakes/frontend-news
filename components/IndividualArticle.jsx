@@ -31,39 +31,20 @@ export default function IndividualArticle() {
         .catch((error) => {
             setIsLoading(false)
             setIsError(true)
-            console.log(error)
         })
     }, [article_id]);
 
-    const handleLike = () => {
+    const handleVote = (num) => {
         getArticlesById(article_id)
         .then((article) => {
-            const incVotes = {inc_votes: 1};
-            const newVotes = article.votes + incVotes.inc_votes;
-            setVotes(newVotes)
-            patchArticleVotes(article_id, incVotes)
-            setLikeBtnDisabled(true)
+            const incVotes = {inc_votes: num};
+            setVotes(article.votes + num);
+            patchArticleVotes(article_id, incVotes);
+            (num > 0) ? setLikeBtnDisabled(true) : setDislikeBtnDisabled(true)
             setIsVoteError(false)
         })
         .catch((error) => {
             setIsVoteError(true)
-            console.log(error)
-        })
-    }
-
-    const handleDislike = () => {
-        getArticlesById(article_id)
-        .then((article) => {
-            const incVotes = {inc_votes: -1};
-            const newVotes = article.votes + incVotes.inc_votes;
-            setVotes(newVotes)
-            patchArticleVotes(article_id, incVotes)
-            setDislikeBtnDisabled(true)
-            setIsVoteError(false)
-        })
-        .catch((error) => {
-            setIsVoteError(true)
-            console.log(error)
         })
     }
 
@@ -82,14 +63,14 @@ export default function IndividualArticle() {
             </section>
             <section className="article-votes">
             <h3>Votes: {votes}</h3>
-                <LikeButton onClick={handleLike} isLikeBtnDisabled={isLikeBtnDisabled}/>
-                <DislikeButton onClick={handleDislike} isDislikeBtnDisabled={isDislikeBtnDisabled}/>
+                <LikeButton onClick={() => {handleVote(1)}} isLikeBtnDisabled={isLikeBtnDisabled}/>
+                <DislikeButton onClick={() => {handleVote(-1)}} isDislikeBtnDisabled={isDislikeBtnDisabled}/>
             </section>
             <section className="article-comments">
-            <h3>Comments</h3>
-            <ul className="article-comments">
+
+            <section className="article-comments">
                 <ArticleComments article={article} article_id={article_id}/>
-            </ul>
+            </section>
             </section>
         </>
     )
