@@ -31,4 +31,12 @@ const patchArticleVotes = (article_id, incVotes) => {
         return data.article
     })
 }
-export {getArticles, getArticlesById, getArticleComments, patchArticleVotes };
+
+const postComment = (article_id, newComment) => {
+    return axios.post(`https://backend-news-tssw.onrender.com/api/articles/${article_id}/comments`, newComment)
+    .then(({data}) => {
+        return data.addedComment
+    })
+}
+
+export {getArticles, getArticlesById, getArticleComments, patchArticleVotes, postComment };
