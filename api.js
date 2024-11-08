@@ -39,4 +39,11 @@ const postComment = (article_id, newComment) => {
     })
 }
 
-export {getArticles, getArticlesById, getArticleComments, patchArticleVotes, postComment };
+const deleteComment = (comment_id) => {
+    return axios.delete(`https://backend-news-tssw.onrender.com/api/comments/${comment_id}`)
+    .then(({data}) => {
+        return data
+    })
+}
+
+export {getArticles, getArticlesById, getArticleComments, patchArticleVotes, postComment, deleteComment };

@@ -7,6 +7,7 @@ export default function ArticleComments({article_id}) {
     const [comments, setComments] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [isPostSuccess, setPostSuccess] = useState(false);
+    const [isDeleted, setIsDeleted] = useState(false)
     const loadingMessage = 'Comments loading...';
 
     useEffect(() => {
@@ -19,7 +20,7 @@ export default function ArticleComments({article_id}) {
             setIsLoading(false)
             console.log(error)
         })
-    }, [isPostSuccess]);
+    }, [isPostSuccess, isDeleted]);
     
     return (isLoading ? loadingMessage : 
         <div>
@@ -28,7 +29,7 @@ export default function ArticleComments({article_id}) {
             <ul>
             { comments.length ? 
             comments.map((comment) => {
-                return <CommentCard key={comment.comment_id} comment={comment}/>
+                return <CommentCard key={comment.comment_id} comment={comment} setIsDeleted={setIsDeleted}/>
             }) : <p>No comments</p>}
             </ul>
         </div>
